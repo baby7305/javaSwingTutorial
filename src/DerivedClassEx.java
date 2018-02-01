@@ -1,25 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class InnerClassEx extends JFrame {
+public class DerivedClassEx extends JFrame {
 
-    public InnerClassEx() {
+    public DerivedClassEx() {
 
         initUI();
     }
 
     private void initUI() {
 
-        JButton closeBtn = new JButton("Close");
-
-        ButtonCloseListener listener = new ButtonCloseListener();
-        closeBtn.addActionListener(listener);
+        MyButton closeBtn = new MyButton("Close");
 
         createLayout(closeBtn);
 
-        setTitle("Inner class example");
+        setTitle("Derived class");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -46,18 +41,10 @@ public class InnerClassEx extends JFrame {
         pack();
     }
 
-    private class ButtonCloseListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.exit(0);
-        }
-    }
-
     public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {
-            InnerClassEx ex = new InnerClassEx();
+            DerivedClassEx ex = new DerivedClassEx();
             ex.setVisible(true);
         });
     }
