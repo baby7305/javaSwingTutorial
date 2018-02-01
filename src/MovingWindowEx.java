@@ -1,10 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 
-public class MovingWindowEx extends JFrame
-        implements ComponentListener {
+public class MovingWindowEx extends JFrame {
 
     private JLabel labelx;
     private JLabel labely;
@@ -16,19 +15,17 @@ public class MovingWindowEx extends JFrame
 
     private void initUI() {
 
-        addComponentListener(this);
+        addComponentListener(new MoveAdapter());
 
         labelx = new JLabel("x: ");
         labelx.setFont(new Font("Serif", Font.BOLD, 14));
-        labelx.setBounds(20, 20, 60, 25);
 
         labely = new JLabel("y: ");
         labely.setFont(new Font("Serif", Font.BOLD, 14));
-        labely.setBounds(20, 45, 60, 25);
 
         createLayout(labelx, labely);
 
-        setTitle("Moving window");
+        setTitle("Adapter example");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -57,26 +54,17 @@ public class MovingWindowEx extends JFrame
         pack();
     }
 
-    @Override
-    public void componentResized(ComponentEvent e) {
-    }
+    private class MoveAdapter extends ComponentAdapter {
 
-    @Override
-    public void componentMoved(ComponentEvent e) {
+        @Override
+        public void componentMoved(ComponentEvent e) {
 
-        int x = e.getComponent().getX();
-        int y = e.getComponent().getY();
+            int x = e.getComponent().getX();
+            int y = e.getComponent().getY();
 
-        labelx.setText("x: " + x);
-        labely.setText("y: " + y);
-    }
-
-    @Override
-    public void componentShown(ComponentEvent e) {
-    }
-
-    @Override
-    public void componentHidden(ComponentEvent e) {
+            labelx.setText("x: " + x);
+            labely.setText("y: " + y);
+        }
     }
 
     public static void main(String[] args) {
