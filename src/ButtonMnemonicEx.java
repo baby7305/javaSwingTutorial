@@ -1,23 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
-public class ImageIconButtonEx extends JFrame {
+public class ButtonMnemonicEx extends JFrame implements ActionListener {
 
-    public ImageIconButtonEx() {
+    public ButtonMnemonicEx() {
 
         initUI();
     }
 
     private void initUI() {
 
-        ImageIcon saveIcon = new ImageIcon("res/save.png");
-        ImageIcon homeIcon = new ImageIcon("res/home.png");
+        JButton showBtn = new JButton("Show");
+        showBtn.addActionListener(this);
+        showBtn.setMnemonic(KeyEvent.VK_S);
 
-        JButton quitBtn = new JButton("Quit");
-        JButton saveBtn = new JButton(saveIcon);
-        JButton homeBtn = new JButton("Home", homeIcon);
-
-        createLayout(quitBtn, saveBtn, homeBtn);
+        createLayout(showBtn);
 
         setTitle("JButtons");
         setLocationRelativeTo(null);
@@ -35,25 +35,28 @@ public class ImageIconButtonEx extends JFrame {
 
         gl.setHorizontalGroup(gl.createSequentialGroup()
                 .addComponent(arg[0])
-                .addComponent(arg[1])
-                .addComponent(arg[2])
+                .addGap(250)
         );
 
         gl.setVerticalGroup(gl.createParallelGroup()
                 .addComponent(arg[0])
-                .addComponent(arg[1])
-                .addComponent(arg[2])
+                .addGap(150)
         );
 
-        gl.linkSize(arg[0], arg[1], arg[2]);
-
         pack();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        JOptionPane.showMessageDialog(this, "Button clicked",
+                "Information", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {
-            ImageIconButtonEx ex = new ImageIconButtonEx();
+            ButtonMnemonicEx ex = new ButtonMnemonicEx();
             ex.setVisible(true);
         });
     }
