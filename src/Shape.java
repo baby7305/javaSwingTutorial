@@ -5,8 +5,12 @@ import java.util.Random;
  */
 public class Shape {
 
-	protected enum Tetrominoes { NoShape, ZShape, SShape, LineShape,
-		TShape, SquareShape, LShape, MirroredLShape };
+	protected enum Tetrominoes {
+		NoShape, ZShape, SShape, LineShape,
+		TShape, SquareShape, LShape, MirroredLShape
+	}
+
+	;
 
 	private Tetrominoes pieceShape;
 	private int coords[][];
@@ -21,18 +25,18 @@ public class Shape {
 
 	public void setShape(Tetrominoes shape) {
 
-		coordsTable = new int[][][] {
-				{ { 0, 0 },   { 0, 0 },   { 0, 0 },   { 0, 0 } },
-				{ { 0, -1 },  { 0, 0 },   { -1, 0 },  { -1, 1 } },
-				{ { 0, -1 },  { 0, 0 },   { 1, 0 },   { 1, 1 } },
-				{ { 0, -1 },  { 0, 0 },   { 0, 1 },   { 0, 2 } },
-				{ { -1, 0 },  { 0, 0 },   { 1, 0 },   { 0, 1 } },
-				{ { 0, 0 },   { 1, 0 },   { 0, 1 },   { 1, 1 } },
-				{ { -1, -1 }, { 0, -1 },  { 0, 0 },   { 0, 1 } },
-				{ { 1, -1 },  { 0, -1 },  { 0, 0 },   { 0, 1 } }
+		coordsTable = new int[][][]{
+				{{0, 0}, {0, 0}, {0, 0}, {0, 0}},
+				{{0, -1}, {0, 0}, {-1, 0}, {-1, 1}},
+				{{0, -1}, {0, 0}, {1, 0}, {1, 1}},
+				{{0, -1}, {0, 0}, {0, 1}, {0, 2}},
+				{{-1, 0}, {0, 0}, {1, 0}, {0, 1}},
+				{{0, 0}, {1, 0}, {0, 1}, {1, 1}},
+				{{-1, -1}, {0, -1}, {0, 0}, {0, 1}},
+				{{1, -1}, {0, -1}, {0, 0}, {0, 1}}
 		};
 
-		for (int i = 0; i < 4 ; i++) {
+		for (int i = 0; i < 4; i++) {
 
 			for (int j = 0; j < 2; ++j) {
 
@@ -43,11 +47,25 @@ public class Shape {
 		pieceShape = shape;
 	}
 
-	private void setX(int index, int x) { coords[index][0] = x; }
-	private void setY(int index, int y) { coords[index][1] = y; }
-	public int x(int index) { return coords[index][0]; }
-	public int y(int index) { return coords[index][1]; }
-	public Tetrominoes getShape()  { return pieceShape; }
+	private void setX(int index, int x) {
+		coords[index][0] = x;
+	}
+
+	private void setY(int index, int y) {
+		coords[index][1] = y;
+	}
+
+	public int x(int index) {
+		return coords[index][0];
+	}
+
+	public int y(int index) {
+		return coords[index][1];
+	}
+
+	public Tetrominoes getShape() {
+		return pieceShape;
+	}
 
 	public void setRandomShape() {
 
@@ -61,7 +79,7 @@ public class Shape {
 
 		int m = coords[0][0];
 
-		for (int i=0; i < 4; i++) {
+		for (int i = 0; i < 4; i++) {
 
 			m = Math.min(m, coords[i][0]);
 		}
@@ -74,7 +92,7 @@ public class Shape {
 
 		int m = coords[0][1];
 
-		for (int i=0; i < 4; i++) {
+		for (int i = 0; i < 4; i++) {
 
 			m = Math.min(m, coords[i][1]);
 		}

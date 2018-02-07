@@ -37,7 +37,7 @@ public class Board extends JPanel
 		timer = new Timer(400, this);
 		timer.start();
 
-		statusbar =  parent.getStatusBar();
+		statusbar = parent.getStatusBar();
 		board = new Shape.Tetrominoes[BoardWidth * BoardHeight];
 		addKeyListener(new TAdapter());
 		clearBoard();
@@ -56,12 +56,20 @@ public class Board extends JPanel
 		}
 	}
 
-	private int squareWidth() { return (int) getSize().getWidth() / BoardWidth; }
-	private int squareHeight() { return (int) getSize().getHeight() / BoardHeight; }
-	private Shape.Tetrominoes shapeAt(int x, int y) { return board[(y * BoardWidth) + x]; }
+	private int squareWidth() {
+		return (int) getSize().getWidth() / BoardWidth;
+	}
+
+	private int squareHeight() {
+		return (int) getSize().getHeight() / BoardHeight;
+	}
+
+	private Shape.Tetrominoes shapeAt(int x, int y) {
+		return board[(y * BoardWidth) + x];
+	}
 
 
-	public void start()  {
+	public void start() {
 
 		if (isPaused)
 			return;
@@ -75,7 +83,7 @@ public class Board extends JPanel
 		timer.start();
 	}
 
-	private void pause()  {
+	private void pause() {
 
 		if (!isStarted)
 			return;
@@ -146,7 +154,7 @@ public class Board extends JPanel
 		pieceDropped();
 	}
 
-	private void oneLineDown()  {
+	private void oneLineDown() {
 
 		if (!tryMove(curPiece, curX, curY - 1))
 			pieceDropped();
@@ -174,7 +182,7 @@ public class Board extends JPanel
 			newPiece();
 	}
 
-	private void newPiece()  {
+	private void newPiece() {
 
 		curPiece.setRandomShape();
 		curX = BoardWidth / 2 + 1;
@@ -245,9 +253,9 @@ public class Board extends JPanel
 		}
 	}
 
-	private void drawSquare(Graphics g, int x, int y, Shape.Tetrominoes shape)  {
+	private void drawSquare(Graphics g, int x, int y, Shape.Tetrominoes shape) {
 
-		Color colors[] = { new Color(0, 0, 0), new Color(204, 102, 102),
+		Color colors[] = {new Color(0, 0, 0), new Color(204, 102, 102),
 				new Color(102, 204, 102), new Color(102, 102, 204),
 				new Color(204, 204, 102), new Color(204, 102, 204),
 				new Color(102, 204, 204), new Color(218, 170, 0)
