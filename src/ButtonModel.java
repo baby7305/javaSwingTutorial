@@ -1,6 +1,4 @@
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -24,13 +22,15 @@ public class ButtonModel extends JFrame {
 		pane.setLayout(gl);
 
 		okbtn = new JButton("OK");
-		okbtn.addChangeListener(new DisabledChangeListener());
 		cb = new JCheckBox();
 		cb.setAction(new CheckBoxAction());
 
 		enabledLbl = new JLabel("Enabled: true");
 		pressedLbl = new JLabel("Pressed: false");
-		armedLbl = new JLabel("Armed: false");
+		armedLbl  = new JLabel("Armed: false");
+
+		javax.swing.ButtonModel model = new OkButtonModel();
+		okbtn.setModel(model);
 
 		gl.setAutoCreateContainerGaps(true);
 		gl.setAutoCreateGaps(true);
@@ -59,35 +59,44 @@ public class ButtonModel extends JFrame {
 
 		pack();
 
-		setTitle("ButtonModel");
+		setTitle("Custom button model");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
-	private class DisabledChangeListener implements ChangeListener {
+	private class OkButtonModel extends DefaultButtonModel {
 
 		@Override
-		public void stateChanged(ChangeEvent e) {
-
-			DefaultButtonModel model = (DefaultButtonModel) okbtn.getModel();
-
-			if (model.isEnabled()) {
+		public void setEnabled(boolean b) {
+			if (b) {
 				enabledLbl.setText("Enabled: true");
 			} else {
 				enabledLbl.setText("Enabled: false");
 			}
 
-			if (model.isArmed()) {
+			super.setEnabled(b);
+		}
+
+		@Override
+		public void setArmed(boolean b) {
+			if (b) {
 				armedLbl.setText("Armed: true");
 			} else {
 				armedLbl.setText("Armed: false");
 			}
 
-			if (model.isPressed()) {
+			super.setArmed(b);
+		}
+
+		@Override
+		public void setPressed(boolean b) {
+			if (b) {
 				pressedLbl.setText("Pressed: true");
 			} else {
 				pressedLbl.setText("Pressed: false");
 			}
+
+			super.setPressed(b);
 		}
 	}
 
